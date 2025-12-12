@@ -1,25 +1,26 @@
-import psutil
-import time
-import os
+import socket
 
-def limpar_tela():
-    os.system("cls" if os.name == "nt" else "clear")
+def verificar_porta(host, porta):
+    sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    sock.settimeout(1)
 
-def monitorar():
-    while True:
-        limpar_tela()
+    try:
+        resultado = sock.connect_ex((host, porta))
 
-        cpu = psutil.cpu_percent(interval=1)
-        memoria = psutil.virtual_memory()
+        if resultado == 0:
+            print(f"🔓 Porta {porta} ABERTA em {host}")
+        else:
+            print(f"🔒 Porta {porta} FECHADA em {host}")
 
-        print("=== MONITORAMENTO DO SISTEMA ===")
-        print(f"Uso de CPU: {cpu}%")
-        print(f"Uso de RAM: {memoria.percent}%")
-        print(f"RAM usada: {round(memoria.used / (1024 ** 3), 2)} GB")
-        print(f"RAM total: {round(memoria.total / (1024 ** 3), 2)} GB")
-        print("\nPressione CTRL + C para sair")
+    except Exception as e:
+        print(f"❌ Erro ao verificar: {e}")
 
-        time.sleep(1)
+    finally:
+        sock.close()
 
-if __name__ == "__main__":
-    monitorar()
+
+print("===== Verificador de Porta =====")
+host = input("Digite o endereço IP ou site: ")
+porta = int(input("Digite a porta que deseja verificar: "))
+
+verificar_porta(host, porta)
