@@ -1,26 +1,11 @@
-import socket
+import psutil
 
-def verificar_porta(host, porta):
-    sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-    sock.settimeout(1)
+print("=== MONITORAMENTO DO SISTEMA ===")
 
-    try:
-        resultado = sock.connect_ex((host, porta))
+cpu = psutil.cpu_percent(interval=1)
+mem = psutil.virtual_memory()
 
-        if resultado == 0:
-            print(f"🔓 Porta {porta} ABERTA em {host}")
-        else:
-            print(f"🔒 Porta {porta} FECHADA em {host}")
-
-    except Exception as e:
-        print(f"❌ Erro ao verificar: {e}")
-
-    finally:
-        sock.close()
-
-
-print("===== Verificador de Porta =====")
-host = input("Digite o endereço IP ou site: ")
-porta = int(input("Digite a porta que deseja verificar: "))
-
-verificar_porta(host, porta)
+print(f"Uso de CPU: {cpu}%")
+print(f"Uso de RAM: {mem.percent}%")
+print(f"RAM usada: {mem.used / (1024**3):.2f} GB")
+print(f"RAM total: {mem.total / (1024**3):.2f} GB")
