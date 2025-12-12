@@ -29,4 +29,4 @@ Digite o endereço IP ou site: google.com
 
 Digite a porta que deseja verificar: 80
 
-🔓 Porta 80 ABERTA em google.com
+RESULTADO = Porta 80 ABERTA em google.com <<
