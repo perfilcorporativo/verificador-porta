@@ -22,7 +22,11 @@ Projeto ideal para iniciantes que desejam aprender sobre sockets, redes e testes
 ---
 
 🎯 Exemplo de uso
+
 ===== Verificador de Porta =====
-Digite o endereço IP ou site: google.com -
+
+Digite o endereço IP ou site: google.com
+
 Digite a porta que deseja verificar: 80
+
 🔓 Porta 80 ABERTA em google.com
